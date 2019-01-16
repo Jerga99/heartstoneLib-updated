@@ -20,10 +20,10 @@ export class CardDetailPage {
               private loaderService: LoaderService,
               private alertSerice: AlertService) { }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     const cardId = this.route.snapshot.paramMap.get('cardId');
 
-    this.loaderService.presentLoading();
+    await this.loaderService.presentLoading();
     this.cardService.getCardById(cardId).subscribe(
       (card: Card[]) => {
         this.card = card.map((card: Card) => {
@@ -33,7 +33,8 @@ export class CardDetailPage {
         })[0];
 
         this.loaderService.dismissLoading();
-    });
+    },
+    () => this.loaderService.dismissLoading());
   }
 
   updateImage() {

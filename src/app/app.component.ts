@@ -17,7 +17,7 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private fcm: FcmService,
+    // private fcm: FcmService,
     private toastr: ToastService
 
   ) {
@@ -27,23 +27,23 @@ export class AppComponent {
 
 
   private notificationSetup() {
-    this.fcm.getToken();
-    this.fcm.onNotifications().subscribe(
-      (msg) => {
-        console.log('');
-        if (this.platform.is('ios')) {
-          this.toastr.presentToast(msg.aps.alert);
-        } else {
-          this.toastr.presentToast(msg.body);
-        }
-      });
+    // this.fcm.getToken();
+    // this.fcm.onNotifications().subscribe(
+    //   (msg) => {
+    //     console.log('');
+    //     if (this.platform.is('ios')) {
+    //       this.toastr.presentToast(msg.aps.alert);
+    //     } else {
+    //       this.toastr.presentToast(msg.body);
+    //     }
+    //   });
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.notificationSetup();
+      // this.notificationSetup();
     });
   }
 }

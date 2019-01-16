@@ -1,11 +1,15 @@
+// import { NgModule } from '@angular/core';
+// import { RouterModule, Routes } from '@angular/router';
+
+// import { TabsPage } from './tabs.page';
+import { CardDeckPage } from '../card/card-deck/card-deck.page';
+import { CardListingPage } from '../card/card-listing/card-listing.page';
+import { CardDetailPage } from '../card/card-detail/card-detail.page';
+import { CardFavoritePage } from '../card/card-favorite/card-favorite.page'
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
-import { CardDeckPage } from '../card/card-deck/card-deck.page';
-import { CardListingPage } from '../card/card-listing/card-listing.page';
-import { CardDetailPage } from '../card/card-detail/card-detail.page';
-import { CardFavoritePage } from '../card/card-favorite/card-favorite.page';
 
 const routes: Routes = [
   {
@@ -13,30 +17,32 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'favorite',
-        outlet: 'favorite',
-        component: CardFavoritePage
-      },
-      {
         path: 'card',
-        outlet: 'card',
-        component: CardDeckPage
+        children: [
+          {
+            path: '',
+            loadChildren: '../card/card.module#CardPageModule'
+          }
+          // { path: ':cardDeckGroup/:cardDeck', component: CardListingPage },
+          // { path: ':cardId', component: CardDetailPage },
+          // { path: '', component: CardDeckPage }
+        ]
       },
+
       {
-        path: 'card/:cardId',
-        outlet: 'card',
-        component: CardDetailPage
-      },
-      {
-        path: 'card/:cardDeckGroup/:cardDeck',
-        outlet: 'card',
-        component: CardListingPage
+        path: 'favorite',
+        children: [
+          {
+            path: '',
+            loadChildren: '../favorite/favorite.module#FavoritePageModule'
+          }
+        ]
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/(card:card)',
+    redirectTo: '/tabs/card',
     pathMatch: 'full'
   }
 ];

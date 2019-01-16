@@ -1,13 +1,11 @@
-// OLD CODE, IN SEPARATED MODULE NOW
 import { Component } from '@angular/core';
-import { FavoriteCardStore } from '../shared/card-favorite.store';
 import { Subscription } from 'rxjs';
-import { Card } from '../shared/card.model';
+import { FavoriteCardStore } from '../card/shared/card-favorite.store';
+import { Card } from '../card/shared/card.model';
 
 @Component({
   selector: 'app-card-favorite',
-  templateUrl: './card-favorite.page.html',
-  styleUrls: ['./card-favorite.page.scss'],
+  templateUrl: './favorite.page.html'
 })
 export class CardFavoritePage {
 
@@ -15,13 +13,15 @@ export class CardFavoritePage {
 
   favoriteCardSub: Subscription;
 
-  constructor(private favoriteCardStore: FavoriteCardStore) {
+  constructor(private favoriteCardStore: FavoriteCardStore) {}
+
+  ionViewWillEnter () {
     this.favoriteCardSub = this.favoriteCardStore.favoriteCards.subscribe(
-      (favoriteCards: any) => {
-        this.favoriteCardList = this.getFavoriteCardList(favoriteCards);
-        console.log(this.favoriteCardList);
-      })
-   }
+    (favoriteCards: any) => {
+      this.favoriteCardList = this.getFavoriteCardList(favoriteCards);
+      console.log(this.favoriteCardList);
+    })
+  }
 
   ionViewDidLeave() {
     if (this.favoriteCardSub && !this.favoriteCardSub.closed) {

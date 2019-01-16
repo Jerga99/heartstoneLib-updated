@@ -17,6 +17,8 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import { FcmService } from './shared/service/fcm.service';
 import { ToastService } from './shared/service/toast.service';
 
+import { FavoriteCardStore } from './card/shared/card-favorite.store';
+
 const config = {
     apiKey: "AIzaSyBv8D1_Dzcr1c_WOiesqOIVH15Yh3fsDo4",
     authDomain: "test-hero-24d99.firebaseapp.com",
@@ -34,14 +36,16 @@ const config = {
     IonicModule.forRoot(),
     AppRoutingModule,
     IonicStorageModule.forRoot(),
-    AngularFireModule.initializeApp(config),
-    AngularFirestoreModule],
+    // AngularFireModule.initializeApp(config),
+    // AngularFirestoreModule
+   ],
   providers: [
     StatusBar,
     SplashScreen,
-    Firebase,
+    // Firebase,
     FcmService,
     ToastService,
+    FavoriteCardStore,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

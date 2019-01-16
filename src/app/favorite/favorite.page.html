@@ -1,5 +1,3 @@
-  <!-- OLD CODE, IN SEPARATED MODULE NOW -->
-
   <ion-header>
   <ion-toolbar>
     <ion-title>Favorite Cards</ion-title>
@@ -8,7 +6,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item [routerLink]="'/tabs/(card:card/' + card.cardId + ')'" *ngFor="let card of favoriteCardList">
+    <ion-item [routerLink]="'/tabs/card/' + card.cardId" *ngFor="let card of favoriteCardList">
       <ion-label>
         <h2> {{card.name}} </h2>
       </ion-label>
